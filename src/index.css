@@ -1,0 +1,43 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+.cofee-card {
+  display: inline-block;
+}
+.cofee-card:hover {
+  transform: scale(1.1);
+}
+
+.App {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url("./assets/cofee_background.jpg");
+  width: 100%;
+  min-height: 100%;
+  height: auto;
+  position: absolute;
+}
+
+.payments-table table {
+  margin: auto;
+  background-color: #423022;
+  opacity: 0.6;
+}
+
+.payments-table th,
+.payments-table td {
+  color: white;
+  font-weight: bold;
+}
