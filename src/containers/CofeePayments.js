@@ -5,7 +5,7 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-
+import Paper from '@mui/material/Paper';
 
 const CofeePayments = ({orders, prices, payments = []}) => {
   const userData = {}
@@ -39,8 +39,9 @@ const CofeePayments = ({orders, prices, payments = []}) => {
   })
   /*TODO: To display the order placed by individual user */
   return (
-    <TableContainer className={'payments-table'} style={{background: 'transparant'}}>
-      <Table sx={{ width: 200 }}>
+    <Paper sx={{width: 500, margin: 'auto', background: 'transparent', overflow: 'hidden' }}>
+    <TableContainer sx={{ maxHeight: 600 }} className={'payments-table'} style={{background: 'transparant'}}>
+      <Table stickyHeader>
         <TableHead>
           <TableRow>
             <TableCell>User</TableCell>
@@ -60,6 +61,7 @@ const CofeePayments = ({orders, prices, payments = []}) => {
         </TableBody>
       </Table>
     </TableContainer>
+    </Paper>
   );
 }
 

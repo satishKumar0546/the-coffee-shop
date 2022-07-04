@@ -35,6 +35,9 @@ code {
   background-color: #423022;
   opacity: 0.6;
 }
+.payments-table th{
+  background-color: #423022;
+}
 
 .payments-table th,
 .payments-table td {

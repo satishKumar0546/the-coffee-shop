@@ -93,7 +93,7 @@ export default function MediaCard({details, onCofeeSelect}) {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={confirmOrder}>Confirm</Button>
+          <Button disabled={!name.trim()} onClick={confirmOrder}>Confirm</Button>
           <Button onClick={closeDialog}>Cancel</Button>
         </DialogActions>
       </Dialog>

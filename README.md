@@ -17,3 +17,15 @@ npm start
 ```
 
 The above command will start the app in the web browser. There are two steps. First step will start the dev server, that has the sample data. The later will start the react application.
+
+```
+npm run test
+```
+
+The above command runs the test scripts
+
+```
+npm run build
+```
+
+The above command runs the build script, so as to create a production build package.
