@@ -44,3 +44,10 @@ code {
   color: white;
   font-weight: bold;
 }
+
+.fixed-download-btn{
+  position: fixed;
+  float: right;
+  top: 1rem;
+  right: 1rem;
+}

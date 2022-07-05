@@ -7,6 +7,9 @@ import CofeeMenu from '../containers/CofeeMenu';
 import CofeeOrders from '../containers/CofeeOrders';
 import CofeePayments from '../containers/CofeePayments';
 import Snackbar from '@mui/material/Snackbar';
+import Button from '@mui/material/Button';
+import { consoleSave } from '../Utils/downloadData';
+import consolidatePayments from '../Utils/getPriceConsolidation';
 
 
 const CoffeeApp = ({payments, orders, addOrder, getInitData, prices = []}) => {
@@ -28,9 +31,20 @@ const CoffeeApp = ({payments, orders, addOrder, getInitData, prices = []}) => {
     setSnackbarShwon(true);
     
   }
+  const downloadData = () =>{
+    const { userData } = consolidatePayments(orders, prices);
+    const output = {payments: userData, prices, orders};
+    console.info(output);
+    consoleSave(output, 'output.json');
+    consoleSave(JSON.stringify(output), 'output.txt');
+  }
   const tabColor= {color: 'white'}
   return (
     <>
+      <Button 
+        sx={{...tabColor, borderColor: 'white'}} 
+        variant="outlined" 
+        className='fixed-download-btn' onClick={downloadData}>Download data</Button>
       <Tabs className={'navigation-buttons'} value={currentTab} onChange={handleChange} centered>
         <Tab label="Cofee Menu" style={tabColor} currentTab={0}/>
         <Tab label="Orders" style={tabColor} currentTab={1}/>

@@ -6,30 +6,10 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import consolidatePayments from '../Utils/getPriceConsolidation';
 
-const CofeePayments = ({orders, prices, payments = []}) => {
-  const userData = {}
-  const priceData = {};
-  prices.forEach(p=>{
-      let obj = {};
-      Object.keys(p.prices).map(c=>{
-        obj[c] = p.prices[c];
-      });
-      priceData[p.drink_name] = obj;
-  })
-  orders.forEach(o=>{
-    const user = o.user;
-    if(userData[user]){
-      userData[user]['orders'].push(`${o.drink}: ${o.size}`);
-      userData[user]['amount'] += priceData[o.drink][o.size];;
-    }
-    else{
-      let obj = {}
-      obj['orders']=[`${o.drink}: ${o.size}`];
-      obj['amount'] = priceData[o.drink][o.size];
-      userData[user] = obj;
-    }
-  })
+const CofeePayments = ({orders, prices}) => {
+  const { userData } = consolidatePayments(orders, prices);
   const displayRows = Object.keys(userData).map(k=>{
     let obj = {user: k};
     let user = userData[k];
