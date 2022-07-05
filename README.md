@@ -23,6 +23,13 @@ npm start
 
 The above command will start the app in the web browser. There are two steps. First step will start the dev server, that has the sample data. The later will start the react application.
 
+### Getting the output
+
+There is a download button at the top right corner of the web page. It will download up to data in two formats.
+
+1. JSON - Output will be in `JSON` format. Open the file with notepad or other text editor.
+2. TXT - Output will be in `String` format. Can open directly with a notepad.
+
 ### Testing the app
 
 ```
