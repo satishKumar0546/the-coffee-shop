@@ -31,7 +31,7 @@ const CoffeeApp = ({payments, orders, addOrder, getInitData, prices = []}) => {
   const tabColor= {color: 'white'}
   return (
     <>
-      <Tabs value={currentTab} onChange={handleChange} centered>
+      <Tabs className={'navigation-buttons'} value={currentTab} onChange={handleChange} centered>
         <Tab label="Cofee Menu" style={tabColor} currentTab={0}/>
         <Tab label="Orders" style={tabColor} currentTab={1}/>
         <Tab label="Payments" style={tabColor} currentTab={2} />

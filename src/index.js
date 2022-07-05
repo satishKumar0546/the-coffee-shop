@@ -1,15 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
-import thunk from 'redux-thunk';
-import { createStore, applyMiddleware } from 'redux';
-import coffeeReducer from './reducers/CofeeShopReducer'
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { store } from './Store';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-let store = createStore(coffeeReducer, applyMiddleware(thunk))
 root.render(
   <Provider store={store}>
     <App />

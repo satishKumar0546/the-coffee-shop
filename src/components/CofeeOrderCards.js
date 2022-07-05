@@ -4,7 +4,6 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
@@ -18,15 +17,12 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Checkbox from '@mui/material/Checkbox';
-import Avatar from '@mui/material/Avatar';
 
-export default function CofeeOrderCards({currentOrder, orders, onCofeeSelect}) {
+export default function CofeeOrderCards({currentOrder, orders}) {
 
   const [open, setOpen] = React.useState(false);
   const [selection, setSelection] = React.useState({});
-  const finalOrders = {};
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
     ...theme.typography.body2,
@@ -46,16 +42,15 @@ export default function CofeeOrderCards({currentOrder, orders, onCofeeSelect}) {
   }
 
   const getOrderLabels = ()=>{
-    return (<div>
-      <Grid container spacing={2}>
-       {Object.keys(orders[currentOrder]).map(size=>{
+    return (
+      <Grid key={currentOrder} container spacing={2}>
+       {Object.keys(orders[currentOrder]).map((size, i)=>{
          const orderObj = orders[currentOrder][size];
          return size !== 'users' ? (<Grid item xs={6}>
-           <Item onClick={()=>onClickSelection(size, orderObj.users)}>{size}: {orderObj['number']}</Item>
+           <Item key={size+i} data-testid={'coffee-orders-size-btn'} onClick={()=>onClickSelection(size, orderObj.users)}>{size}: {orderObj['number']}</Item>
        </Grid>) : undefined
        })}
-      </Grid>
-    </div>)
+      </Grid>)
   }
 
   return (
@@ -74,10 +69,10 @@ export default function CofeeOrderCards({currentOrder, orders, onCofeeSelect}) {
               {getOrderLabels()}
         </CardContent>
         </Card>
-        <Dialog open={open} onClose={closeDialog}>
+        <Dialog data-testid="order-list-dialog" open={open} onClose={closeDialog}>
         <DialogTitle></DialogTitle>
         <DialogContent>
-          <DialogContentText>
+          <DialogContentText className={'order-text'}>
            <b>{`${currentOrder} - ${selection.size}`}</b>
           </DialogContentText>
           <List dense sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
@@ -85,6 +80,7 @@ export default function CofeeOrderCards({currentOrder, orders, onCofeeSelect}) {
               const labelId = `checkbox-list-secondary-label-${value}`;
               return (
                 <ListItem
+                  data-testid={'coffee-order-list'}
                   key={value+idx}
                   secondaryAction={
                     <Checkbox

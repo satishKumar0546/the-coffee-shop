@@ -15,7 +15,7 @@ import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import cofee1 from '../assets/cofee1.jpg';
 
-export default function MediaCard({details, onCofeeSelect}) {
+export default function MediaCard({onCofeeSelect, details = {}}) {
 
   const [open, setOpen] = React.useState(false);
   const [selection, setSelection] = React.useState({});
@@ -27,6 +27,10 @@ export default function MediaCard({details, onCofeeSelect}) {
     textAlign: 'center',
     cursor: 'pointer',
     color: theme.palette.text.secondary,
+    '&:hover':{
+      background: '#957a5b',
+      color: 'white'
+    }
   }));
 
   const onCofeeCardSelect = (name, size, price) =>{
@@ -36,11 +40,11 @@ export default function MediaCard({details, onCofeeSelect}) {
 
   const basicDetails = (detail) =>{
     return (<div>
-      <Grid container spacing={2}>
+      <Grid className="coffee-btn-size-container" key={`grid-container-${detail.drink_name}`} container spacing={2}>
        {Object.keys(detail.prices).map(size=>{
          const price = detail.prices[size];
-         return <Grid item xs={6}>
-           <Item key={`${detail.drink_name}${size}`} onClick={()=>onCofeeCardSelect(detail.drink_name, size, price)}>{size}: ${price}</Item>
+         return <Grid className="coffee-size-btn" key={`small-grid-container-${detail.drink_name}${size}`} item xs={6}>
+           <Item key={`${detail.drink_name}${size}`} data-testid={'coffee-size-btn'} onClick={()=>onCofeeCardSelect(detail.drink_name, size, price)}>{size}: ${price}</Item>
        </Grid>
        })}
       </Grid>
@@ -74,28 +78,28 @@ export default function MediaCard({details, onCofeeSelect}) {
         </Card>
 
 
-        <Dialog open={open} onClose={closeDialog}>
-        <DialogTitle>Confirmation</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            You have selected <b>{`${selection.size} - ${selection.name}`}</b> cofee, that is <b>${`${selection.price}`}</b>
-            <br/>Please help with your name.
-          </DialogContentText>
-          <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            label="Your name"
-            type="text"
-            fullWidth
-            variant="standard"
-            onChange={(e)=>{setName(e.target.value)}}
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button disabled={!name.trim()} onClick={confirmOrder}>Confirm</Button>
-          <Button onClick={closeDialog}>Cancel</Button>
-        </DialogActions>
+        <Dialog data-testid="order-confirmation-dialog" open={open} onClose={closeDialog}>
+          <DialogTitle>Confirmation</DialogTitle>
+          <DialogContent>
+            <DialogContentText className="confirmation-message">
+              You have selected <b>{`${selection.size} - ${selection.name}`}</b> coffee, that is <b>${`${selection.price}.`}</b>
+              <br/>Please help with your name.
+            </DialogContentText>
+            <TextField
+              autoFocus
+              margin="dense"
+              id="name"
+              label="Your name"
+              type="text"
+              fullWidth
+              variant="standard"
+              onChange={(e)=>{setName(e.target.value)}}
+            />
+          </DialogContent>
+          <DialogActions>
+            <Button disabled={!name.trim()} onClick={confirmOrder}>Confirm</Button>
+            <Button onClick={closeDialog}>Cancel</Button>
+          </DialogActions>
       </Dialog>
 
     </div>
