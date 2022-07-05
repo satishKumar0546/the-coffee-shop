@@ -30,6 +30,10 @@ export default function CofeeOrderCards({currentOrder, orders}) {
     textAlign: 'center',
     cursor: 'pointer',
     color: theme.palette.text.secondary,
+    '&:hover':{
+      background: '#957a5b',
+      color: 'white'
+    }
   }));
 
   const onClickSelection = (size, users) =>{
